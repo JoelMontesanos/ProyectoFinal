@@ -3,8 +3,12 @@ const faker = require('faker');
 const fs = require('fs');
 const LINE_ENDING = require('os').EOL;
 
+
+
+
 module.exports = {
-    create: function (req, res) {
+    
+    create: async function (req, res) {
         const fd = fs.openSync(PAYMENT_FILE_PATH, 'a');
         fs.appendFileSync(fd, faker.commerce.price() + LINE_ENDING, 'utf8');
         res.status(201).send();

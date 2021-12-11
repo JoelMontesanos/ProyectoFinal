@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const KEY_FILE = path.resolve('./valid-keys.txt');
+const KEY_FILE = path.resolve('./valid-keys.txt'); //originaly it was ./valid-keys.txt
 const PAYMENT_FILE_PATH = path.resolve('./payment-generated.txt');
 const os = require('os');
 const faker = require('faker');
@@ -11,18 +11,18 @@ const readFile = (path) => {
         fs.readFile(path, {encoding: 'utf-8'}, (err, data) => {
             if (err) reject(err);
             else resolve(data);
-        })
+        });
     });
 };
 
-const getKeysFromFile = () => {
+const  getKeysFromFile =  () => {
     return readFile(KEY_FILE)
         .then(data => {
             return compact(data.split(os.EOL));
         })
 };
 
-const getFromFile = (path) => {
+const getFromFile =  (path) => {
     return readFile(path)
         .then(data => {
             return compact(data.split(os.EOL));

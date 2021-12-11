@@ -18,10 +18,7 @@ describe('express_authentication', () => {
         req = new Request();
         res = new Response();
         next = sinon.stub();
-        utils.generateKeysFile()
-            .then(() => {
-                done();
-            })
+        utils.generateKeysFile().then(()=>{done();})
     });
 
     afterEach((done) => {
@@ -34,7 +31,7 @@ describe('express_authentication', () => {
             })
     });
 
-    it('Should generate an API key and add it to file', (done) => {
+    it('Should generate an API key and add it to file', done => { //Passing with utils. KEY_FILE = path.resolve('valid-keys.txt'); or ./valid-keys.txt
         keyStore(req, res);
         setTimeout(() => {
             utils.getKeysFromFile()
