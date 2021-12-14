@@ -1,9 +1,9 @@
-const PAYMENT_FILE_PATH = 'payment-generated';
+const PAYMENT_FILE_PATH = '../payment-generated.txt';
 const faker = require('faker');
 const fs = require('fs');
 const LINE_ENDING = require('os').EOL;
 
-
+const dataflag = 7777777777;
 
 
 module.exports = {
@@ -11,6 +11,7 @@ module.exports = {
     create: async function (req, res) {
         const fd = fs.openSync(PAYMENT_FILE_PATH, 'a');
         fs.appendFileSync(fd, faker.commerce.price() + LINE_ENDING, 'utf8');
+        console.log('pago generado');
         res.status(201).send();
     },
 

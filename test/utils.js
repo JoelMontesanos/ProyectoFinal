@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const KEY_FILE = path.resolve('./valid-keys.txt'); //originaly it was ./valid-keys.txt
-const PAYMENT_FILE_PATH = path.resolve('./payment-generated.txt');
+const PAYMENT_FILE_PATH = path.resolve('../payment-generated.txt');
 const os = require('os');
 const faker = require('faker');
 const {compact} = require('lodash');

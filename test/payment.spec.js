@@ -5,7 +5,7 @@ const server = require('../app');
 const should = chai.should();
 const sinon = require('sinon');
 const payment = require('../controllers/payment.controller');
-const PAYMENT_FILE_PATH = path.resolve('./payment-generated.txt');
+const PAYMENT_FILE_PATH = path.resolve('../payment-generated.txt');
 const {Request, Response} = require('./mock');
 const utils = require('./utils');
 const {uniq} = require('lodash');
@@ -21,9 +21,9 @@ describe('payment check', () => {
         res = new Response();
         next = sinon.stub();
         utils.generatePaymentFile()
-            .then(() => {
-                done();
-            })
+            .then( 
+                done()
+            );
     });
 
     afterEach((done) => {
@@ -32,11 +32,12 @@ describe('payment check', () => {
         }
         done();
         utils.removeFile(PAYMENT_FILE_PATH)
-          .then(() => done() )
+          .then(() => {        })
+        //done();
     });
 
     it('Should generate an random price', (done) => {
-        payment.create(req, res);
+        payment.create(req, res,);
         setTimeout(() => {
             utils.getFromFile(PAYMENT_FILE_PATH)
                 .then(data => {
@@ -47,7 +48,7 @@ describe('payment check', () => {
     });
 
     it('Should generate 5 random prices', done => {
-        let n = 10;
+        let n = 5;
         for (let i = 0; i < n; i++) {
             payment.create(req, res);
         }
@@ -57,8 +58,8 @@ describe('payment check', () => {
                     data.length.should.eql(n);
                     const uniqKeys = uniq(data);
                     uniqKeys.length.should.eql(data.length);
-                    done();
-                })
+                });
+                done();
         }, 500);
     });
 
@@ -67,8 +68,8 @@ describe('payment check', () => {
         chai.request(server)
             .get('/payment/promos')
             .then(promos => {
-                promos.body.length.should.eql(5);
-                done();
+                promos.body.length.should.eql(5);                
             })
+            done();
     });
 });
