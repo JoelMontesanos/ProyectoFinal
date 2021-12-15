@@ -4,6 +4,7 @@ const KEY_FILE = path.resolve('./valid-keys.txt'); //originaly it was ./valid-ke
 const PAYMENT_FILE_PATH = path.resolve('../payment-generated.txt');
 const os = require('os');
 const faker = require('faker');
+const SHIPPING = path.resolve('../shipping-generated.txt');
 const {compact} = require('lodash');
 
 const readFile = (path) => {
@@ -63,6 +64,25 @@ const removeFile = (path) => {
     })
 };
 
+
+const generateShippment = (data) => {
+      return new Promise((resolve,reject) =>{
+        const person = faker.name +LINE_ENDING+ faker.address +LINE_ENDING+ faker.commerce.product;
+            fs.writeFile(SHIPPING, person, (err)=>{
+                if(!err){console.log('Shipping done!');}
+            });
+            res.status(201).send();
+      });   
+};
+
+const reviewAddres = (data) => {
+    return new Promise((resolve,reject)=> {
+        const addres = faker.address;
+        return addres;
+    });
+};
+
+
 module.exports = {
     readFile,
     removeFile,
@@ -71,4 +91,6 @@ module.exports = {
     generateKeysFile,
     getFromFile,
     generatePaymentFile,
+    generateShippment,
+    reviewAddres,
 };

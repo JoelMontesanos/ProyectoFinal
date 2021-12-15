@@ -42,9 +42,9 @@ describe('payment check', () => {
             utils.getFromFile(PAYMENT_FILE_PATH)
                 .then(data => {
                     data.length.should.eql(1);
-                    done();
                 })
         }, 500);
+        done();
     });
 
     it('Should generate 5 random prices', done => {
