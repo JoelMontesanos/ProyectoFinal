@@ -1,13 +1,18 @@
-FROM node:14
+FROM node:14-alpine
 
-WORKDIR /usr/src/app
+USER node
 
-COPY package*.json ./
+RUN mkdir -p /home/node/app
 
-RUN npm install
+WORKDIR /home/node/app
 
-COPY . .
+COPY --chown=node package*.json ./
 
-EXPOSE 4000
+RUN npm install 
+COPY --chown=node . .
 
-CMD [ "npm", "run", "test" ]
+ENV HOST=0.0.0.0 PORT=3000
+
+EXPOSE ${PORT}
+
+CMD ["npm", "run", "test"]
