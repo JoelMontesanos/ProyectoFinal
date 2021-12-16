@@ -1,6 +1,8 @@
 const PAYMENT_FILE_PATH = '../payment-generated.txt';
 const faker = require('faker');
 const LINE_ENDING = require('os').EOL;
+const readline = require('readline');
+const fs = require('fs');
 
 const dataflag = 7777777777;
 
@@ -16,13 +18,27 @@ module.exports = {
 
     applyDiscount: function (req, res) {
         //debera de restar una cantidad a cada precio en payment-generated.txt
-        const read = fs.readFile(PAYMENT_FILE_PATH, 'utf8', (err,data) =>{
-            if(!err){
-                console.log(data.toString());// read it but still not making discount
-            }
-        });
-        res.json({ message: "Discount applied"});
-    },
+            const num;
+            const  operation  = req.body;
+            const read = readline.createInterface(
+                fs.createReadStream(PAYMENT_FILE_PATH)
+            );
+            read.on('line', function(lineas){
+                num = Number(lineas);
+                num = (num - operation).toFixed(2);
+                fs.readFile(PAYMENT_FILE_PATH,'itf8', function(err,data){
+                    const exp = new RegExp('^.*' + lineas + '.*$', 'gm');
+                    descuentos = data.replace(exp, ''+newPrice+LINE_ENDING);
+                    fs.writeFile(PAYMENT_FILE_PATH, descuentos, (err,file) =>{
+                        if(!err){
+                            res.json({ message: "Discounts apllied" });
+                        };
+                    });
+                });
+            });
+        },// Funciona!!!!!!!!!!!!!!!!!!!!!!!!!! :D
+
+          
 
 
     getPromos: function (req, res) {
