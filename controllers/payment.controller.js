@@ -18,13 +18,13 @@ module.exports = {
 
     applyDiscount: function (req, res) {
         //debera de restar una cantidad a cada precio en payment-generated.txt
-            const num;
+            
             const  operation  = req.body;
             const read = readline.createInterface(
                 fs.createReadStream(PAYMENT_FILE_PATH)
             );
             read.on('line', function(lineas){
-                num = Number(lineas);
+                const num = Number(lineas);
                 num = (num - operation).toFixed(2);
                 fs.readFile(PAYMENT_FILE_PATH,'itf8', function(err,data){
                     const exp = new RegExp('^.*' + lineas + '.*$', 'gm');
@@ -36,7 +36,7 @@ module.exports = {
                     });
                 });
             });
-        },// Funciona!!!!!!!!!!!!!!!!!!!!!!!!!! :D
+        },// in doub ...
 
           
 
