@@ -1,17 +1,18 @@
-module.exports = {
-    sum: function (req, res) {
-        res.status(201).send();
-    },
 
-    substract: function (req, res) {
-        res.status(201).send();
-    },
+    module.exports = {
+        sum: function (a, b) {
+            return a + b;
+        },
 
-    multiply: function (req, res) {
-        res.status(201).send();
-    },
+        substract: function (a, b) {
+            return a - b;
+        },
 
-    divide: function (req, res) {
-        res.status(201).send();
-    }
-};
+        multiply: function (a, b) {
+            return a * b;
+        },
+
+        divide: function (a, b) {
+            return a / b;
+        }
+    };
